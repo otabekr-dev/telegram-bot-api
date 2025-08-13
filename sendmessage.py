@@ -1,12 +1,12 @@
 import requests
-from settings import TOKEN
+from settings import token
 
 
-BASE_URL = f'https://api.telegram.org/bot{TOKEN}'
-
+BASE_URL = f'https://api.telegram.org/bot{token}'
+text = input('enter: ')
 params = {
-    'chat_id': 1258594598,
-    'text': 'Nima gap'
+    'chat_id': 5363692421,
+    'text': text
 }
 
 sendmessage_url = f'{BASE_URL}/sendMessage'
