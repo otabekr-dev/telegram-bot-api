@@ -96,8 +96,6 @@ def updater(token: str):
             
             if 'message' in update:
                 message = update['message']
-            if 'message' in update:
-                message = update['message']
                 user = update['message']['from']
 
                 if 'text' in message:
