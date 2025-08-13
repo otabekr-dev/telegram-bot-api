@@ -1,1 +1,0 @@
-TOKEN = 'TG_TOKEN'
