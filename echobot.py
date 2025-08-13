@@ -84,6 +84,46 @@ def send_animation(chat_id: str, animation: str):
     sendanim_url = f'{BASE_URL}/sendAnimation'
     requests.get(sendanim_url, params=params)
 
+def send_video(chat_id: str, video: str):
+
+    params = {
+        'chat_id': chat_id,
+        'video': video
+    }    
+
+    sendvid_url = f'{BASE_URL}/sendVideo'
+    requests.get(sendvid_url, params=params)
+
+def send_video_note(chat_id: str, video_note: str):
+
+    params = {
+        'chat_id': chat_id,
+        'video_note': video_note
+    }
+
+    sendvn_url = f'{BASE_URL}/sendVideoNote'
+    requests.get(sendvn_url, params=params)
+
+
+def send_media_group(chat_id: str, media):
+
+    params = {
+        'chat_id': chat_id,
+        'media': media
+    }    
+    sendmg_url = f'{BASE_URL}/sendMediaGroup'
+    requests.get(sendmg_url, params)
+
+def send_location(chat_id: str, latitude: float, longitude: float):
+    params = {
+        'chat_id': chat_id,
+        'latitude': latitude,
+        'longitude': longitude
+    }
+    sendlocation_url = f'{BASE_URL}/sendLocation'
+    requests.get(sendlocation_url, params=params)
+
+
 def updater(token: str):
 
     offset = None
@@ -131,7 +171,26 @@ def updater(token: str):
 
                     send_animation(user['id'], animation['file_id'])
 
+                elif 'video' in message:
+                    video = message['video']
 
+                    send_video(user['id'], video['file_id'])    
+
+                elif 'video_note' in message:
+                    video_note = message['video_note']
+
+                    send_video_note(user['id'], video_note['file_id'])
+
+                elif 'media' in message:
+                    media = message['media']
+
+                    send_media_group(user['id'], media['file_id'])    
+                
+                elif 'location' in message:
+                    location = message['location']
+                    send_location(user['id'], location['latitude'], location['longitude'])
+
+            
             offset = update['update_id'] + 1
 
         sleep(1)
